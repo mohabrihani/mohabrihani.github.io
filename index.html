@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOHAB RIHANI — Cybersecurity Portfolio</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- AOS (scroll animations) -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0f1f;
+      --bg-2: #0e1629;
+      --text: #cfe9ff;
+      --muted: #9ab7d1;
+      --neon: #00e5ff; /* cyan */
+      --neon-2: #39ff14; /* green */
+      --accent: #7c4dff; /* purple */
+      --card: #0b1428;
+      --border: #152241;
+      --shadow-neon: 0 0 12px rgba(0,229,255,.45), 0 0 40px rgba(0,229,255,.25);
+    }
+
+        .profile-pic-container {
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #00f0ff;
+            box-shadow: 0 0 15px #00f0ff, 0 0 30px #00f0ff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            object-fit: cover;
+        }
+        .profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+            display: flex;
+        }
+
+    html, body { height: 100%; }
+    body {
+      background: radial-gradient(1200px 800px at 10% 10%, #0c1a33 0%, var(--bg) 55%),
+                  radial-gradient(600px 600px at 90% 0%, rgba(124,77,255,.12), transparent 60%),
+                  radial-gradient(800px 800px at 100% 100%, rgba(0,229,255,.08), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Subtle animated grid */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background: linear-gradient(transparent 23px, rgba(124,77,255,.12) 24px),
+                  linear-gradient(90deg, transparent 23px, rgba(124,77,255,.12) 24px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(closest-side, rgba(0,0,0,.65), transparent 80%);
+      animation: pan 30s linear infinite;
+    }
+    @keyframes pan { to { transform: translateY(-24px); } }
+
+    .navbar {
+      background: rgba(7,12,24,.65);
+      backdrop-filter: saturate(150%) blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar-brand, .nav-link { color: var(--text) !important; }
+    .nav-link:hover { color: var(--neon) !important; }
+
+    .btn-neon {
+      --btn-bg: linear-gradient(90deg, var(--neon), var(--neon-2));
+      color: #00161a; font-weight: 700; letter-spacing: .3px;
+      background: var(--btn-bg);
+      border: none; box-shadow: var(--shadow-neon);
+    }
+    .btn-neon:hover { filter: brightness(1.05) saturate(1.05); box-shadow: 0 0 16px rgba(0,229,255,.7), 0 0 36px rgba(57,255,20,.4); }
+
+    .hero {
+      position: relative; z-index: 1; min-height: 92vh;
+      display: grid; place-items: center; text-align: center;
+      padding-top: 72px;
+    }
+    .hero h1 { font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: -1px; }
+    .glow { text-shadow: 0 0 18px rgba(0,229,255,.4), 0 0 36px rgba(124,77,255,.35); }
+    .cursor { display:inline-block; width: 10px; height: 1em; background: var(--neon); margin-left: 4px; animation: blink 1s steps(1) infinite; vertical-align: -2px; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .section { position: relative; z-index: 1; padding: 80px 0; }
+    .section-title {
+      font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: .5px;
+      display: inline-block; padding-bottom: 8px; margin-bottom: 28px;
+      border-bottom: 2px solid rgba(0,229,255,.5);
+      box-shadow: 0 3px 0 0 rgba(57,255,20,.35);
+    }
+
+    .card.cyber {
+      background: linear-gradient(180deg, rgba(20,32,62,.8), rgba(8,16,32,.9));
+      border: 1px solid var(--border); border-radius: 18px; color: var(--text);
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+    .card.cyber:hover { border-color: rgba(0,229,255,.5); box-shadow: var(--shadow-neon); }
+
+    .badge-skill {
+      background: rgba(0,229,255,.1); color: var(--neon);
+      border: 1px solid rgba(0,229,255,.35);
+      padding: .6rem .9rem; border-radius: 999px; font-weight: 700;
+    }
+
+    .divider {
+      height: 1px; background: linear-gradient(90deg, transparent, rgba(0,229,255,.4), transparent);
+      margin: 36px 0;
+    }
+
+    footer { border-top: 1px solid var(--border); background: #070c18; }
+
+    /* Make Who Am I text white */
+    .whoami-text, .whoami-list li { color: #ffffff !important; }
+
+    /* Responsive tweaks */
+    @media (max-width: 576px) {
+      .hero h1 { font-size: 1.9rem; }
+      .hero p.lead { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#home"><i class="bi bi-shield-lock"></i> MOHAB RIHANI</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#certs">Certs</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero container">
+
+    <div class="profile-pic-container">
+        <img src="1000133446.jpg" alt="MOHAB RIHANI" class="profile-pic">
+    </div>
+
+    <div class="row align-items-center w-100">
+      <div class="col-12 col-lg-10 mx-auto" data-aos="fade-up">
+        <span class="badge rounded-pill text-dark" style="background: linear-gradient(90deg, var(--neon), var(--neon-2)); font-weight:800;">Cybersecurity | أمن سيبراني</span>
+        <h1 class="display-5 mt-4 mb-3 glow">MOHAB RIHANI</h1>
+        <p class="lead text-secondary" id="typewriter"></p>
+        <div class="mt-4 d-flex flex-wrap gap-2 justify-content-center">
+          <a class="btn btn-neon btn-lg" href="#projects"><i class="bi bi-rocket-takeoff"></i> View Projects</a>
+          <a class="btn btn-outline-info btn-lg" style="border-color: rgba(0,229,255,.4);" href="#contact"><i class="bi bi-envelope-at"></i> Contact</a>
+          <a class="btn btn-outline-success btn-lg" style="border-color: rgba(57,255,20,.45);" href="#skills"><i class="bi bi-asterisk"></i> Skills</a>
+        </div>
+      </div>
+    </div>
+
+    
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="row g-4 align-items-stretch">
+        <div class="col-12 col-lg-7" data-aos="fade-right">
+          <div class="card cyber h-100 p-4">
+            <h5 class="mb-3"><i class="bi bi-fingerprint"></i> Who Am I?</h5>
+            <p class="whoami-text">I’m a cybersecurity specialist focused on protecting systems, networks, and people. I work across <strong>red/blue/purple</strong> activities: vulnerability assessment, penetration testing, incident response, SIEM tuning, and secure architecture.</p>
+            <div class="divider"></div>
+            <ul class="list-unstyled small whoami-list mb-0">
+              <li class="mb-2"><i class="bi bi-check2-circle text-info"></i> Ethical hacking & adversary emulation</li>
+              <li class="mb-2"><i class="bi bi-check2-circle text-info"></i> Threat hunting & DFIR</li>
+              <li class="mb-2"><i class="bi bi-check2-circle text-info"></i> Network & web app security (OWASP)</li>
+              <li class="mb-2"><i class="bi bi-check2-circle text-info"></i> Scripting: Python, Bash; tooling: Nmap, Wireshark, Metasploit, Burp</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5" data-aos="fade-left">
+          <div class="card cyber h-100 p-4">
+            <h5 class="mb-3"><i class="bi bi-briefcase"></i> Services</h5>
+            <ul class="list-unstyled mb-4">
+              <li class="mb-3"><i class="bi bi-shield-check text-success"></i> Penetration Testing</li>
+              <li class="mb-3"><i class="bi bi-bullseye text-info"></i> Vulnerability Assessment</li>
+              <li class="mb-3"><i class="bi bi-bug text-danger"></i> Web/App Security Review</li>
+              <li class="mb-3"><i class="bi bi-incognito text-warning"></i> Social Engineering Readiness</li>
+            </ul>
+            <div class="d-flex gap-2">
+              <a class="btn btn-neon w-100" href="#contact"><i class="bi bi-calendar2-check"></i> Book a Call</a>
+              <a class="btn btn-outline-info w-100" style="border-color: rgba(0,229,255,.4);" href="./MOHAB_RIHANI_CV.pdf" download><i class="bi bi-cloud-download"></i> Download CV</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="row g-3" data-aos="zoom-in-up">
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-wifi"></i> Network Security</span></div>
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-bug"></i> Pentesting</span></div>
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-shield-lock"></i> Blue Team</span></div>
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-file-earmark-code"></i> Python/Bash</span></div>
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-globe2"></i> Web Security</span></div>
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-diagram-3"></i> AD/SIEM</span></div>
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-gear"></i> DevSecOps</span></div>
+        <div class="col-6 col-md-4 col-lg-3"><span class="badge-skill d-block text-center"><i class="bi bi-shield-shaded"></i> OSINT/DFIR</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+          <div class="card cyber h-100" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1400&auto=format&fit=crop" alt="Pentest" />
+            <div class="card-body">
+              <h5 class="card-title">Enterprise Pentest</h5>
+              <p class="card-text text-muted">Black/gray-box assessment across 35 hosts, chained misconfigurations to achieve domain user -> local admin -> lateral movement.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-neon" href="#"><i class="bi bi-file-earmark-text"></i> Report</a>
+                <a class="btn btn-sm btn-outline-info" style="border-color: rgba(0,229,255,.4);" href="#"><i class="bi bi-github"></i> PoCs</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card cyber h-100" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1600267175161-cfaa711b4a81?q=80&w=1400&auto=format&fit=crop" alt="IR" />
+            <div class="card-body">
+              <h5 class="card-title">Incident Response Playbook</h5>
+              <p class="card-text text-muted">Created a playbook for phishing → credential theft → BEC scenarios. Reduced MTTD/MTTR by 38% via log enrichment and alert tuning.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-neon" href="#"><i class="bi bi-diagram-3"></i> Playbook</a>
+                <a class="btn btn-sm btn-outline-info" style="border-color: rgba(0,229,255,.4);" href="#"><i class="bi bi-link-45deg"></i> Demo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card cyber h-100" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <img class="card-img-top" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1400&auto=format&fit=crop" alt="WebSec" />
+            <div class="card-body">
+              <h5 class="card-title">Secure Web App</h5>
+              <p class="card-text text-muted">Built a demo app with JWT, rate limiting, CSP, and parameterized queries; mapped to OWASP Top 10 and ASVS L2.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-sm btn-neon" href="#"><i class="bi bi-window-sidebar"></i> Live</a>
+                <a class="btn btn-sm btn-outline-info" style="border-color: rgba(0,229,255,.4);" href="#"><i class="bi bi-github"></i> Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs" class="section">
+    <div class="container">
+      <h2 class="section-title">Certifications</h2>
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-lg-3" data-aos="flip-left">
+          <div class="card cyber h-100 p-4 text-center">
+            <i class="bi bi-patch-check fs-1 text-info"></i>
+            <h6 class="mt-3 mb-1">eJPT / PNPT</h6>
+            <small class="text-muted">Offensive Foundations</small>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3" data-aos="flip-left" data-aos-delay="100">
+          <div class="card cyber h-100 p-4 text-center">
+            <i class="bi bi-patch-check fs-1 text-success"></i>
+            <h6 class="mt-3 mb-1">Security+</h6>
+            <small class="text-muted">Core Security</small>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3" data-aos="flip-left" data-aos-delay="200">
+          <div class="card cyber h-100 p-4 text-center">
+            <i class="bi bi-patch-check fs-1 text-warning"></i>
+            <h6 class="mt-3 mb-1">Blue Team L1</h6>
+            <small class="text-muted">Defensive Ops</small>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-3" data-aos="flip-left" data-aos-delay="300">
+          <div class="card cyber h-100 p-4 text-center">
+            <i class="bi bi-patch-check fs-1 text-danger"></i>
+            <h6 class="mt-3 mb-1">OSINT</h6>
+            <small class="text-muted">Investigations</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="row g-4">
+        <div class="col-12 col-lg-6" data-aos="fade-right">
+          <div class="card cyber h-100 p-4">
+            <h5 class="mb-3"><i class="bi bi-envelope-at"></i> Get In Touch</h5>
+            <p class="text-muted">Ready to collaborate or need a quick security review? Drop a message and I’ll get back to you.</p>
+            <form action="https://formspree.io/f/myzplypq" method="post" enctype="text/plain">
+              <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" required />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Message</label>
+                <textarea class="form-control" name="message" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-neon"><i class="bi bi-send"></i> Send</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6" data-aos="fade-left">
+          <div class="card cyber h-100 p-4">
+            <h5 class="mb-3"><i class="bi bi-share"></i> Social</h5>
+            <ul class="list-unstyled">
+              <li class="mb-2"><i class="bi bi-linkedin"></i> <a class="link-info" href="#">linkedin.com/in/mohabrihani</a></li>
+              <li class="mb-2"><i class="bi bi-github"></i> <a class="link-info" href="#">github.com/mohab-rihani</a></li>
+              <li class="mb-2"><i class="bi bi-whatsapp"></i> <a class="link-info" href="https://wa.me/201000000000" target="_blank">WhatsApp</a></li>
+              <li class="mb-2"><i class="bi bi-geo-alt"></i> Cairo, Egypt</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-4 text-center">
+    <div class="container small text-muted">© <span id="year"></span> MOHAB RIHANI — Cybersecurity Portfolio</div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true, offset: 80 });
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Typewriter effect
+    const roles = [
+      'Cybersecurity Specialist',
+      'Ethical Hacker',
+      'Blue Team | DFIR',
+      'Red Team | Adversary Emulation',
+      'مختص أمن سيبراني'
+    ];
+    const el = document.getElementById('typewriter');
+    let i = 0, j = 0, deleting = false;
+    function type() {
+      const current = roles[i % roles.length];
+      if (!deleting) {
+        el.textContent = current.slice(0, j++);
+        if (j > current.length + 12) deleting = true; // pause before delete
+      } else {
+        el.textContent = current.slice(0, j--);
+        if (j <= 0) { deleting = false; i++; }
+      }
+      requestAnimationFrame(() => setTimeout(type, deleting ? 35 : 55));
+    }
+    type();
+
+    // Add a blinking cursor next to typewriter
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    el.after(cursor);
+  </script>
+</body>
+</html>
